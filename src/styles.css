@@ -13,24 +13,26 @@
 #units {
   position: relative;
   font-size: 15px;
-  bottom: 20px;
+  bottom: 25px;
 }
 
-#cloud-icn {
-  font-size: 100px;
-  display: block;
-}
 strong {
   font-size: 30px;
 }
+p {
+  margin-bottom: 0px;
+}
 
 .day {
-  line-height: 15px;
+  line-height: 18px;
   border-top-right-radius: 50px;
   border-top-left-radius: 50px;
 }
 
-#temperature {
-  font-size: 45px;
-  font-weight: 400;
+#temperature-value {
+  font-size: 50px;
+  font-weight: 500;
+}
+.temperature {
+  margin-top: -32px;
 }

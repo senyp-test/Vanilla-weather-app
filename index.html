@@ -17,7 +17,7 @@
     <div style="width: 450px" class="container containers">
       <div class="row mt-3">
         <form class="row">
-          <div class="col-md-9">
+          <div class="col-9">
             <input
               placeholder="Type in your city..."
               type="text"
@@ -26,9 +26,9 @@
             />
           </div>
 
-          <div class="col-md-3 w-90">
+          <div class="col-3 w-95">
             <input
-              value="search"
+              value="Search"
               type="submit"
               class="btn btn-primary"
               id="search-btn"
@@ -44,7 +44,7 @@
           <span style="display: block" id="humidity"
             >Humidity: <span id="humidity-value">60</span><span>%</span> </span
           ><span id="wind"
-            >Wind: <span id="wind-value">4</span><span>m/s</span>
+            >Wind: <span id="wind-value">4</span><span>km/h</span>
           </span>
         </div>
 
@@ -58,12 +58,13 @@
         <h1 id="currentCity">HOUSTON</h1>
       </div>
       <img
+        class="w-25"
         id="weather-icon"
         src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
         alt="weather-icon"
       />
       <section class="temperature">
-        <span id="temperature"> 24 </span>
+        <span id="temperature-value">24</span>
         <span id="units">
           <span>
             <a class="text-decoration-none" id="celsius-unit" href="#"
@@ -86,33 +87,33 @@
       <!-- -->
       <div class="row">
         <div class="shadow col-2 monday day">
-          <h4>M</h4>
+          <h5>Mon</h5>
           <strong>🌨️</strong>
           <p>12°C</p>
         </div>
         <div class="shadow col-2 tuesday day">
-          <h4>T</h4>
+          <h5>Tue</h5>
           <strong>🌤️</strong>
           <p>36°C</p>
         </div>
         <div class="shadow col-2 wednesday day">
-          <h4>W</h4>
+          <h5>Wed</h5>
           <strong>☀️</strong>
           <p>42°C</p>
         </div>
         <div class="shadow col-2 thursday day">
-          <h4>T</h4>
+          <h5>Thu</h5>
           <strong>🌦️</strong>
           <p>22°C</p>
         </div>
         <div class="shadow col-2 friday day">
-          <h4>F</h4>
+          <h5>Fri</h5>
 
           <strong>⛅️</strong>
           <p>32°C</p>
         </div>
         <div class="shadow col-2 saturday day">
-          <h4>S</h4>
+          <h5>Sat</h5>
           <strong>⛅️</strong>
           <p>29°C</p>
         </div>
