@@ -13,7 +13,7 @@ function apiCallForCitySearching(city) {
 function getApiData(response) {
   //console.log(response);
   let data = response.data;
-  console.log(data);
+  weatherIcon(data);
   CityTemp(data);
   CityName(data);
   CityHumidity(data);
@@ -108,6 +108,12 @@ function addClassList(elementId) {
 function removeClassList(elementId) {
   let link = document.querySelector(`#${elementId}`);
   link.classList.remove("unclickable-link");
+}
+function weatherIcon(data) {
+  let weatherIcon = data.weather[0].icon;
+  let weatherIconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+  let weatherIconChange = document.querySelector("#weather-icon");
+  weatherIconChange.src = `${weatherIconUrl}`;
 }
 
 let farenheit = document.querySelector("#farenheit-unit");
