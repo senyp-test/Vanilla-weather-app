@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div style="width: 450px" class="container containers">
+      <div class="row mt-3">
+        <form class="row">
+          <div class="col-md-9">
+            <input
+              placeholder="Type in your city..."
+              type="text"
+              class="form-control"
+              id="city-input"
+            />
+          </div>
+
+          <div class="col-md-3 w-90">
+            <input
+              value="search"
+              type="submit"
+              class="btn btn-primary"
+              id="search-btn"
+            />
+          </div>
+
+          <br />
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-6 text-start mt-5">
+          <p></p>
+          <span style="display: block" id="humidity"
+            >Humidity: <span id="humidity-value">60</span><span>%</span> </span
+          ><span id="wind"
+            >Wind: <span id="wind-value">4</span><span>m/s</span>
+          </span>
+        </div>
+
+        <div class="col-6 text-end mt-5 mr-0 lh-sm">
+          <h1 class="mb-0">Weather</h1>
+          <span style="display: block" id="day-and-time">Sunday</span>
+          <span class="text-capitalize" id="description">clear</span>
+        </div>
+      </div>
+      <div class="mt-5">
+        <h1 id="currentCity">HOUSTON</h1>
+      </div>
+      <img
+        id="weather-icon"
+        src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+        alt="weather-icon"
+      />
+      <section class="temperature">
+        <span id="temperature"> 24 </span>
+        <span id="units">
+          <span>
+            <a class="text-decoration-none" id="celsius-unit" href="#"
+              >°C</a
+            ></span
+          >
+          <span
+            >|
+            <a class="text-decoration-none" id="farenheit-unit" href="#"
+              >°F</a
+            ></span
+          >
+        </span>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </section>
+      <!-- -->
+      <div class="row">
+        <div class="shadow col-2 monday day">
+          <h4>M</h4>
+          <strong>🌨️</strong>
+          <p>12°C</p>
+        </div>
+        <div class="shadow col-2 tuesday day">
+          <h4>T</h4>
+          <strong>🌤️</strong>
+          <p>36°C</p>
+        </div>
+        <div class="shadow col-2 wednesday day">
+          <h4>W</h4>
+          <strong>☀️</strong>
+          <p>42°C</p>
+        </div>
+        <div class="shadow col-2 thursday day">
+          <h4>T</h4>
+          <strong>🌦️</strong>
+          <p>22°C</p>
+        </div>
+        <div class="shadow col-2 friday day">
+          <h4>F</h4>
+
+          <strong>⛅️</strong>
+          <p>32°C</p>
+        </div>
+        <div class="shadow col-2 saturday day">
+          <h4>S</h4>
+          <strong>⛅️</strong>
+          <p>29°C</p>
+        </div>
+      </div>
+      <!-- -->
+    </div>
+    <footer class="text-center">
+      <a
+        class="text-decoration-none"
+        href="https://github.com/senyp-test/weather-project"
+        >Open-source code</a
+      >
+      <span>by Oseni Peace</span>
+    </footer>
+    <script src="src/app.js"></script>
+  </body>
+</html>
