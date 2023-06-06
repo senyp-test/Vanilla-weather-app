@@ -36,3 +36,7 @@ p {
 .temperature {
   margin-top: -32px;
 }
+.unclickable-link {
+  pointer-events: none;
+  color: black;
+}

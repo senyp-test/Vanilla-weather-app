@@ -25,7 +25,6 @@ function getApiData(response) {
 function CityTemp(data) {
   let temp = Math.round(data.main.temp);
   htmlReplace("temperature-value", temp);
-  //console.log(temp);
 }
 ///function to get city name from the API
 function CityName(data) {
@@ -83,5 +82,38 @@ function getDate(data) {
   let lastUpdated = `Updated ${day} ${hours}:${minutes}`;
   htmlReplace("day-and-time", lastUpdated);
 }
+
+function farenheitUnit(event) {
+  event.preventDefault();
+  let currentValue = document.querySelector("#temperature-value");
+  currentValue = Math.round(currentValue.innerHTML * 1.8 + 32);
+  htmlReplace("temperature-value", currentValue);
+  addClassList("farenheit-unit");
+  removeClassList("celsius-unit");
+}
+
+function celsiusUnit(event) {
+  event.preventDefault();
+  let farenhietValue = document.querySelector("#temperature-value");
+  farenhietValue = farenhietValue.innerHTML;
+  let celsiusValue = Math.round(((farenhietValue - 32) * 5) / 9);
+  htmlReplace("temperature-value", celsiusValue);
+  addClassList("celsius-unit");
+  removeClassList("farenheit-unit");
+}
+function addClassList(elementId) {
+  let link = document.querySelector(`#${elementId}`);
+  link.classList.add("unclickable-link");
+}
+function removeClassList(elementId) {
+  let link = document.querySelector(`#${elementId}`);
+  link.classList.remove("unclickable-link");
+}
+
+let farenheit = document.querySelector("#farenheit-unit");
+farenheit.addEventListener("click", farenheitUnit);
+
+let celsius = document.querySelector("#celsius-unit");
+celsius.addEventListener("click", celsiusUnit);
 
 defaultCity("paris");
