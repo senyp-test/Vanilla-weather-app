@@ -13,11 +13,13 @@ function apiCallForCitySearching(city) {
 function getApiData(response) {
   //console.log(response);
   let data = response.data;
+  console.log(data);
   CityTemp(data);
   CityName(data);
   CityHumidity(data);
   CityWind(data);
   CityDescription(data);
+  getDate(data);
 }
 //function to get temperature value from API
 function CityTemp(data) {
@@ -49,4 +51,37 @@ function CityDescription(data) {
 function defaultCity(defaultCity) {
   apiCallForCitySearching(defaultCity);
 }
-defaultCity("lisbon");
+// function to get the city searched by user and get the weather from the API
+function getFormInput(event) {
+  event.preventDefault();
+  let city = document.querySelector("#city-input");
+  let cityInput = city.value;
+  cityInput = cityInput.toUpperCase().replace(".", " ").trim();
+  apiCallForCitySearching(cityInput);
+  //console.log(cityInput);
+}
+// For form submission
+let form = document.querySelector("form");
+form.addEventListener("submit", getFormInput);
+
+//Function for last updated time
+function getDate(data) {
+  let daysOfTheWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let timeStamp = data.dt;
+  let date = new Date(timeStamp * 1000);
+  let day = daysOfTheWeek[date.getDay()];
+  let hours = date.getHours().toString().padStart(2, "0");
+  let minutes = date.getMinutes().toString().padStart(2, "0");
+  let lastUpdated = `Updated ${day} ${hours}:${minutes}`;
+  htmlReplace("day-and-time", lastUpdated);
+}
+
+defaultCity("paris");
