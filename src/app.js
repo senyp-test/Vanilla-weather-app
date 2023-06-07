@@ -118,9 +118,9 @@ function removeClassList(elementId) {
 
 // function to search for the current location of user on the api
 function apiCallForCurrentLocation(lat, long) {
-  let apiKey = "50c2acd53349fabd54f52b93c8650d37";
-  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
-  axios.get(url).then(getApiData); //api calls the function to recieve data
+  let apiKey = "b7c86efaac7c13373o4d08b12f9t3f33";
+  let url = `https://api.shecodes.io/weather/v1/current?lon=${long}&lat=${lat}&key=${apiKey}&units=metric`;
+  axios.get(url).then(getCoordApiData); //api calls the function to recieve data
 }
 //for current location from user location
 function currentLocation(position) {
@@ -170,6 +170,18 @@ function forcastDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let forcastDay = daysOfForcast[date.getDay()];
   return forcastDay;
+}
+function getCoordApiData(response) {
+  //it gives the forcastapicall the name of the city searched by user
+  forecastApiCall(response);
+  let data = response.data;
+  weatherIcon(data);
+  CityTemp(data);
+  CityName(data);
+  CityHumidity(data);
+  CityWind(data);
+  CityDescription(data);
+  getDate(data);
 }
 
 let currentLocationIcon = document.querySelector(".location-icon");
