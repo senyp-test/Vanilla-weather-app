@@ -130,7 +130,7 @@ function currentLocation(position) {
 }
 //function to get current location of user
 function getUserGeoLocation(event) {
-  event.preventDefault();
+  //event.preventDefault();
   navigator.geolocation.getCurrentPosition(currentLocation);
 }
 
