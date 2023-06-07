@@ -13,7 +13,7 @@
 #units {
   position: relative;
   font-size: 15px;
-  bottom: 25px;
+  bottom: 20px;
 }
 
 strong {
@@ -38,7 +38,14 @@ p {
   font-weight: 500;
 }
 .temperature {
-  margin-top: -32px;
+  display: flex;
+  align-items: center;
+  margin-left: 80px;
+  margin-bottom: 100px;
+}
+#weather-icon {
+  width: 100px;
+  margin-left: 20px;
 }
 .unclickable-link {
   pointer-events: none;
@@ -54,6 +61,7 @@ p {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
     -2px -2px 4px rgba(255, 255, 255, 0.5);
 }
+
 #min {
   opacity: 0.5;
 }
