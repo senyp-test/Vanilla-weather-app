@@ -115,6 +115,25 @@ function weatherIcon(data) {
   let weatherIconChange = document.querySelector("#weather-icon");
   weatherIconChange.src = `${weatherIconUrl}`;
 }
+// function to search for the current location of user on the api
+function apiCallForCurrentLocation(lat, long) {
+  let apiKey = "50c2acd53349fabd54f52b93c8650d37";
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
+  axios.get(url).then(getApiData); //api calls the function to recieve data
+}
+//for current location from user location
+function currentLocation(position) {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  apiCallForCurrentLocation(lat, long);
+}
+//function to get current location of user
+function getUserGeoLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(currentLocation);
+}
+let currentLocationIcon = document.querySelector(".location-icon");
+currentLocationIcon.addEventListener("click", getUserGeoLocation);
 
 let farenheit = document.querySelector("#farenheit-unit");
 farenheit.addEventListener("click", farenheitUnit);
