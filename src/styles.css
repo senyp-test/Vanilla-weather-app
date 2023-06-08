@@ -45,19 +45,19 @@ p {
 }
 #weather-icon {
   width: 100px;
-  margin-left: 20px;
 }
 .unclickable-link {
   pointer-events: none;
   color: black;
 }
 .location-icon {
+  transition: all 200ms ease-in-out;
   font-size: 30px;
   padding-top: 4px;
 }
 .location-icon:hover {
   border-radius: 4px;
-  border: 1px solid #d9dce0;
+  border: 0px solid #d9dce0;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
     -2px -2px 4px rgba(255, 255, 255, 0.5);
 }

@@ -137,14 +137,28 @@ function getUserGeoLocation(event) {
 function weatherForcastSorting(response) {
   let dailyForcast = response.data.daily;
   let sentence = "";
+  let forcastDetails = {};
   dailyForcast.forEach(function (daysForcast, index) {
     if (index < 6) {
       let day = forcastDay(daysForcast.time);
       let forcastIcon = daysForcast.condition.icon_url;
       let maxTemp = Math.round(daysForcast.temperature.maximum);
       let minTemp = Math.round(daysForcast.temperature.minimum);
+      let humidity = daysForcast.temperature.humidity;
+      let wind = daysForcast.wind.speed;
+      let description = daysForcast.condition.description;
+      forcastDetails[index] = {
+        indexex: index,
+        days: day,
+        icon: forcastIcon,
+        max: maxTemp,
+        min: minTemp,
+        humi: humidity,
+        win: wind,
+        descriptin: description,
+      };
 
-      sentence += `<div class="shadow col-2  day">
+      sentence += `<div class="shadow col-2 day day${index}">
             <h6>${day}</h6>
             <strong
               ><img
@@ -166,14 +180,13 @@ function forecastApiCall(data) {
   axios.get(url).then(weatherForcastSorting);
 }
 function forcastDay(timestamp) {
-  let daysOfForcast = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+  let daysOfForcast = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let date = new Date(timestamp * 1000);
   let forcastDay = daysOfForcast[date.getDay()];
   return forcastDay;
 }
 function getCoordApiData(response) {
   //it gives the forcastapicall the name of the city searched by user
-  forecastApiCall(response);
   let data = response.data;
   weatherIcon(data);
   CityTemp(data);
