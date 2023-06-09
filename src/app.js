@@ -97,7 +97,6 @@ function daysForcast(forecast) {
       }
     }
   }
-  console.log(day);
 
   let weatherIcon = forecast.icon;
   let weatherIconChange = document.querySelector("#weather-icon");
@@ -337,6 +336,15 @@ function handleDaysOfForcastClicking(response) {
   });
   StylingDaysOnclick();
 }
+function getIPAddress() {
+  let url = "https://ipapi.co/json";
+  axios.get(url).then(recieveIP);
+}
+function recieveIP(response) {
+  let userIPCity = response.data.city;
+  defaultCity(userIPCity);
+}
+getIPAddress();
 // For form submission
 let form = document.querySelector("form");
 form.addEventListener("submit", getFormInput);
@@ -350,15 +358,5 @@ farenheit.addEventListener("click", farenheitUnit);
 let celsius = document.querySelector("#celsius-unit");
 celsius.addEventListener("click", celsiusUnit);
 // this function gets the ip address of user
-function getIPAddress() {
-  let url = "https://ipapi.co/json";
-  axios.get(url).then(recieveIP);
-}
 
 // get the city of the ip address and use it as the default city
-function recieveIP(response) {
-  let userIPCity = response.data.city;
-  defaultCity(userIPCity);
-}
-
-getIPAddress();
