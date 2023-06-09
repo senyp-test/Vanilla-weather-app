@@ -17,9 +17,8 @@ body {
 .day-clicked {
   pointer-events: none;
   border-radius: 4px;
-  border: 1px solid #d9dce0;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
-    -2px -2px 4px rgba(255, 255, 255, 0.5);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5),
+    -1px -1px 2px rgba(255, 255, 255, 0.5);
 }
 .containers h1 {
   color: azure;
@@ -47,8 +46,6 @@ strong img {
 .day:hover {
   cursor: pointer;
   border-radius: 4px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
-    -2px -2px 4px rgba(255, 255, 255, 0.5);
 }
 #day-and-time {
   color: azure;

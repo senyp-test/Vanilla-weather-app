@@ -254,7 +254,7 @@ function weatherForcastSorting(response) {
         descriptin: description,
       };
 
-      sentence += `<div class="shadow col-2 day" id="day${index}">
+      sentence += `<div class="col-2 day" id="day${index}">
             <h6>${day}</h6>
             <strong
               ><img
