@@ -68,6 +68,46 @@ function currentLocation(position) {
 function defaultCity(defaultCity) {
   apiCallForCitySearching(defaultCity);
 }
+function daysForcast(forecast) {
+  let day = forecast.days;
+  if (day === "Mon") {
+    day = "Monday";
+  } else {
+    if (day === "Tue") {
+      day = "Tuesday";
+    } else {
+      if (day === "Wed") {
+        day = "Wednesday";
+      } else {
+        if (day === "Thu") {
+          day = "Thursday";
+        } else {
+          if (day === "Fri") {
+            day = "Friday";
+          } else {
+            if (day === "Sat") {
+              day = "Saturday";
+            } else {
+              if (day === "Sun") {
+                day = "Sunday";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  console.log(day);
+
+  let weatherIcon = forecast.icon;
+  let weatherIconChange = document.querySelector("#weather-icon");
+  weatherIconChange.src = `${weatherIcon}`;
+  htmlReplace("temperature-value", forecast.max);
+  htmlReplace("humidity-value", forecast.humi);
+  htmlReplace("wind-value", Math.round(forecast.win));
+  htmlReplace("description", forecast.descriptin);
+  htmlReplace("day-and-time", `${day}'s Forecast`);
+}
 // This function handles the conversion of celsius to farenhiet
 function farenheitUnit(event) {
   event.preventDefault();
@@ -296,15 +336,6 @@ function handleDaysOfForcastClicking(response) {
     daysForcast(response[5]);
   });
   StylingDaysOnclick();
-}
-function daysForcast(forecast) {
-  let weatherIcon = forecast.icon;
-  let weatherIconChange = document.querySelector("#weather-icon");
-  weatherIconChange.src = `${weatherIcon}`;
-  htmlReplace("temperature-value", forecast.max);
-  htmlReplace("humidity-value", forecast.humi);
-  htmlReplace("wind-value", Math.round(forecast.win));
-  htmlReplace("description", forecast.descriptin);
 }
 // For form submission
 let form = document.querySelector("form");
