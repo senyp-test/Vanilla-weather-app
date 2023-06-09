@@ -33,8 +33,9 @@ function CityTemp(data) {
 
 ///function to get city name from the API
 function CityName(data) {
-  let cityName = data.city.toUpperCase();
-  htmlReplace("currentCity", cityName);
+  let cityName = data.city;
+  let country = data.country;
+  htmlReplace("currentCity", `${cityName},${country}`);
 }
 
 //function to get humidity value from API
