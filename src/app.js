@@ -232,7 +232,7 @@ function daysForcast(forecast) {
   weatherIconChange.src = `${weatherIcon}`;
   htmlReplace("temperature-value", forecast.max);
   htmlReplace("humidity-value", forecast.humi);
-  htmlReplace("wind-value", forecast.win);
+  htmlReplace("wind-value", Math.round(forecast.win));
   htmlReplace("description", forecast.descriptin);
 }
 // For form submission

@@ -23,9 +23,6 @@ strong img {
   width: 40px;
   margin-top: -7px;
 }
-p {
-  margin-bottom: 0px;
-}
 
 .day {
   line-height: 18px;
@@ -67,4 +64,28 @@ p {
 }
 #min-max {
   font-size: small;
+}
+#wind {
+  background-color: rgb(78, 156, 214, 0.4);
+  border-radius: 4px;
+  border: 0px solid #d9dce0;
+  padding: 10px 2px;
+}
+#description {
+  background-color: rgb(78, 156, 214, 0.4);
+  border-radius: 4px;
+  border: 0px solid #d9dce0;
+  padding: 10px 2px;
+}
+#humidity {
+  background-color: rgb(78, 156, 214, 0.4);
+  border-radius: 4px;
+  border: 0px solid #d9dce0;
+  padding: 10px 2px;
+}
+.weather-details {
+  color: rgba(0, 0, 0, 0.593);
+}
+#forcast-section {
+  margin-top: 55px;
 }
