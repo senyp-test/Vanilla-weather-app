@@ -1,7 +1,7 @@
 //This function add class to an element on the html
-function addClassList(elementId) {
+function addClassList(elementId, unclickableLink) {
   let link = document.querySelector(`#${elementId}`);
-  link.classList.add("unclickable-link");
+  link.classList.add(unclickableLink);
 }
 // this function  calls the API
 function apiCallForCitySearching(city) {
@@ -22,8 +22,8 @@ function celsiusUnit(event) {
   farenhietValue = farenhietValue.innerHTML;
   let celsiusValue = Math.round(((farenhietValue - 32) * 5) / 9);
   htmlReplace("temperature-value", celsiusValue);
-  addClassList("celsius-unit");
-  removeClassList("farenheit-unit");
+  addClassList("celsius-unit", "unclickable-link");
+  removeClassList("farenheit-unit", "unclickable-link");
 }
 //function to get temperature value from API
 function CityTemp(data) {
@@ -69,8 +69,8 @@ function farenheitUnit(event) {
   let currentValue = document.querySelector("#temperature-value");
   currentValue = Math.round(currentValue.innerHTML * 1.8 + 32);
   htmlReplace("temperature-value", currentValue);
-  addClassList("farenheit-unit");
-  removeClassList("celsius-unit");
+  addClassList("farenheit-unit", "unclickable-link");
+  removeClassList("celsius-unit", "unclickable-link");
 }
 // this function is in charge of calling the forecast API
 function forecastApiCall(data) {
@@ -145,14 +145,78 @@ function recieveCoordApiData(response) {
   getDate(data);
 }
 // This function removes class from an element on the html
-function removeClassList(elementId) {
+function removeClassList(elementId, unclickableLink) {
   let link = document.querySelector(`#${elementId}`);
-  link.classList.remove("unclickable-link");
+  link.classList.remove(unclickableLink);
 }
 //this function handles the replacement of innerHTML on the html page
 function htmlReplace(id, yourReplacement) {
   let cityReplacement = document.querySelector(`#${id}`);
   cityReplacement.innerHTML = `${yourReplacement}`;
+}
+function StylingDaysOnclick() {
+  styleDays0();
+  let day0 = document.querySelector("#day0");
+  day0.addEventListener("click", styleDays0);
+  let day1 = document.querySelector("#day1");
+  day1.addEventListener("click", styleDays1);
+  let day2 = document.querySelector("#day2");
+  day2.addEventListener("click", styleDays2);
+  let day3 = document.querySelector("#day3");
+  day3.addEventListener("click", styleDays3);
+  let day4 = document.querySelector("#day4");
+  day4.addEventListener("click", styleDays4);
+  let day5 = document.querySelector("#day5");
+  day5.addEventListener("click", styleDays5);
+}
+
+function styleDays0() {
+  addClassList("day0", "day-clicked");
+  removeClassList("day1", "day-clicked");
+  removeClassList("day2", "day-clicked");
+  removeClassList("day3", "day-clicked");
+  removeClassList("day4", "day-clicked");
+  removeClassList("day5", "day-clicked");
+}
+function styleDays1() {
+  addClassList("day1", "day-clicked");
+  removeClassList("day0", "day-clicked");
+  removeClassList("day2", "day-clicked");
+  removeClassList("day3", "day-clicked");
+  removeClassList("day4", "day-clicked");
+  removeClassList("day5", "day-clicked");
+}
+function styleDays2() {
+  addClassList("day2", "day-clicked");
+  removeClassList("day0", "day-clicked");
+  removeClassList("day1", "day-clicked");
+  removeClassList("day3", "day-clicked");
+  removeClassList("day4", "day-clicked");
+  removeClassList("day5", "day-clicked");
+}
+function styleDays3() {
+  addClassList("day3", "day-clicked");
+  removeClassList("day1", "day-clicked");
+  removeClassList("day2", "day-clicked");
+  removeClassList("day0", "day-clicked");
+  removeClassList("day4", "day-clicked");
+  removeClassList("day5", "day-clicked");
+}
+function styleDays4() {
+  addClassList("day4", "day-clicked");
+  removeClassList("day1", "day-clicked");
+  removeClassList("day2", "day-clicked");
+  removeClassList("day3", "day-clicked");
+  removeClassList("day0", "day-clicked");
+  removeClassList("day5", "day-clicked");
+}
+function styleDays5() {
+  addClassList("day5", "day-clicked");
+  removeClassList("day1", "day-clicked");
+  removeClassList("day2", "day-clicked");
+  removeClassList("day3", "day-clicked");
+  removeClassList("day4", "day-clicked");
+  removeClassList("day0", "day-clicked");
 }
 //this function is in charge of changing the icon weather to the corresponding weather
 function weatherIcon(data) {
@@ -226,6 +290,7 @@ function handleDaysOfForcastClicking(response) {
   day5.addEventListener("click", function () {
     daysForcast(response[5]);
   });
+  StylingDaysOnclick();
 }
 function daysForcast(forecast) {
   let weatherIcon = forecast.icon;
@@ -259,4 +324,5 @@ function recieveIP(response) {
   let userIPCity = response.data.city;
   defaultCity(userIPCity);
 }
+
 getIPAddress();
