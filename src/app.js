@@ -58,6 +58,10 @@ function currentLocation(position) {
   let long = position.coords.longitude;
   apiCallForCurrentLocation(lat, long);
 }
+//Function to call for a default city.
+function defaultCity(defaultCity) {
+  apiCallForCitySearching(defaultCity);
+}
 // This function handles the conversion of celsius to farenhiet
 function farenheitUnit(event) {
   event.preventDefault();
@@ -207,9 +211,15 @@ farenheit.addEventListener("click", farenheitUnit);
 
 let celsius = document.querySelector("#celsius-unit");
 celsius.addEventListener("click", celsiusUnit);
-//Function to call for a default city.
-function defaultCity(defaultCity) {
-  apiCallForCitySearching(defaultCity);
+// this function gets the ip address of user
+function getIPAddress() {
+  let url = "https://ipapi.co/json";
+  axios.get(url).then(recieveIP);
 }
 
-defaultCity("paris");
+// get the city of the ip address and use it as the default city
+function recieveIP(response) {
+  let userIPCity = response.data.city;
+  defaultCity(userIPCity);
+}
+getIPAddress();
