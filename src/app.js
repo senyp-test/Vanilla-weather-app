@@ -1,37 +1,42 @@
-//function to replace values on html page
-function htmlReplace(id, yourReplacement) {
-  let cityReplacement = document.querySelector(`#${id}`);
-  cityReplacement.innerHTML = `${yourReplacement}`;
+//This function add class to an element on the html
+function addClassList(elementId) {
+  let link = document.querySelector(`#${elementId}`);
+  link.classList.add("unclickable-link");
 }
-
+// this function  calls the API
 function apiCallForCitySearching(city) {
   let apiKey = "b7c86efaac7c13373o4d08b12f9t3f33";
   let shecodesurl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  //console.log(url);
   axios.get(shecodesurl).then(getApiData);
 }
-function getApiData(response) {
-  //it gives the forcastapicall the name of the city searched by user
-  forecastApiCall(response.data.city);
-  let data = response.data;
-  weatherIcon(data);
-  CityTemp(data);
-  CityName(data);
-  CityHumidity(data);
-  CityWind(data);
-  CityDescription(data);
-  getDate(data);
+// function to search for the current location of user on the api
+function apiCallForCurrentLocation(lat, long) {
+  let apiKey = "b7c86efaac7c13373o4d08b12f9t3f33";
+  let url = `https://api.shecodes.io/weather/v1/current?lon=${long}&lat=${lat}&key=${apiKey}&units=metric`;
+  axios.get(url).then(recieveCoordApiData); //api calls the function to recieve data
+}
+//THIS function handles the conversion of fahrenheit to celsius
+function celsiusUnit(event) {
+  event.preventDefault();
+  let farenhietValue = document.querySelector("#temperature-value");
+  farenhietValue = farenhietValue.innerHTML;
+  let celsiusValue = Math.round(((farenhietValue - 32) * 5) / 9);
+  htmlReplace("temperature-value", celsiusValue);
+  addClassList("celsius-unit");
+  removeClassList("farenheit-unit");
 }
 //function to get temperature value from API
 function CityTemp(data) {
   let temp = Math.round(data.temperature.current);
   htmlReplace("temperature-value", temp);
 }
+
 ///function to get city name from the API
 function CityName(data) {
   let cityName = data.city.toUpperCase();
   htmlReplace("currentCity", cityName);
 }
+
 //function to get humidity value from API
 function CityHumidity(data) {
   let cityHumidity = data.temperature.humidity;
@@ -47,14 +52,48 @@ function CityDescription(data) {
   let CityDescription = data.condition.description;
   htmlReplace("description", CityDescription);
 }
-function weatherIcon(data) {
-  let weatherIcon = data.condition.icon_url;
-  let weatherIconChange = document.querySelector("#weather-icon");
-  weatherIconChange.src = `${weatherIcon}`;
+//for current location from user location
+function currentLocation(position) {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  apiCallForCurrentLocation(lat, long);
 }
-//Function to call for a default city.
-function defaultCity(defaultCity) {
-  apiCallForCitySearching(defaultCity);
+// This function handles the conversion of celsius to farenhiet
+function farenheitUnit(event) {
+  event.preventDefault();
+  let currentValue = document.querySelector("#temperature-value");
+  currentValue = Math.round(currentValue.innerHTML * 1.8 + 32);
+  htmlReplace("temperature-value", currentValue);
+  addClassList("farenheit-unit");
+  removeClassList("celsius-unit");
+}
+// this function is in charge of calling the forecast API
+function forecastApiCall(data) {
+  let query = data;
+  let key = "b7c86efaac7c13373o4d08b12f9t3f33";
+  let url = `https://api.shecodes.io/weather/v1/forecast?query=${query}&key=${key}&units=metric`;
+  //console.log(url);
+  axios.get(url).then(weatherForcastSorting);
+}
+//this function gets the response from the Api and distribute it accordingly
+function getApiData(response) {
+  //it gives the forcastapicall the name of the city searched by user
+  forecastApiCall(response.data.city);
+  let data = response.data;
+  weatherIcon(data);
+  CityTemp(data);
+  CityName(data);
+  CityHumidity(data);
+  CityWind(data);
+  CityDescription(data);
+  getDate(data);
+}
+// this function is in charge of getting the day of the forcast
+function forcastDay(timestamp) {
+  let daysOfForcast = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let date = new Date(timestamp * 1000);
+  let forcastDay = daysOfForcast[date.getDay()];
+  return forcastDay;
 }
 // function to get the city searched by user and get the weather from the API
 function getFormInput(event) {
@@ -65,10 +104,6 @@ function getFormInput(event) {
   apiCallForCitySearching(cityInput);
   //console.log(cityInput);
 }
-// For form submission
-let form = document.querySelector("form");
-form.addEventListener("submit", getFormInput);
-
 //Function for last updated time
 function getDate(data) {
   let daysOfTheWeek = [
@@ -88,52 +123,39 @@ function getDate(data) {
   let lastUpdated = `Updated ${day} ${hours}:${minutes}`;
   htmlReplace("day-and-time", lastUpdated);
 }
-
-function farenheitUnit(event) {
-  event.preventDefault();
-  let currentValue = document.querySelector("#temperature-value");
-  currentValue = Math.round(currentValue.innerHTML * 1.8 + 32);
-  htmlReplace("temperature-value", currentValue);
-  addClassList("farenheit-unit");
-  removeClassList("celsius-unit");
-}
-
-function celsiusUnit(event) {
-  event.preventDefault();
-  let farenhietValue = document.querySelector("#temperature-value");
-  farenhietValue = farenhietValue.innerHTML;
-  let celsiusValue = Math.round(((farenhietValue - 32) * 5) / 9);
-  htmlReplace("temperature-value", celsiusValue);
-  addClassList("celsius-unit");
-  removeClassList("farenheit-unit");
-}
-function addClassList(elementId) {
-  let link = document.querySelector(`#${elementId}`);
-  link.classList.add("unclickable-link");
-}
-function removeClassList(elementId) {
-  let link = document.querySelector(`#${elementId}`);
-  link.classList.remove("unclickable-link");
-}
-
-// function to search for the current location of user on the api
-function apiCallForCurrentLocation(lat, long) {
-  let apiKey = "b7c86efaac7c13373o4d08b12f9t3f33";
-  let url = `https://api.shecodes.io/weather/v1/current?lon=${long}&lat=${lat}&key=${apiKey}&units=metric`;
-  axios.get(url).then(getCoordApiData); //api calls the function to recieve data
-}
-//for current location from user location
-function currentLocation(position) {
-  let lat = position.coords.latitude;
-  let long = position.coords.longitude;
-  apiCallForCurrentLocation(lat, long);
-}
 //function to get current location of user
 function getUserGeoLocation(event) {
   //event.preventDefault();
   navigator.geolocation.getCurrentPosition(currentLocation);
 }
-
+//recieve the response from the API and distribute the data
+function recieveCoordApiData(response) {
+  let data = response.data;
+  weatherIcon(data);
+  CityTemp(data);
+  CityName(data);
+  CityHumidity(data);
+  CityWind(data);
+  CityDescription(data);
+  getDate(data);
+}
+// This function removes class from an element on the html
+function removeClassList(elementId) {
+  let link = document.querySelector(`#${elementId}`);
+  link.classList.remove("unclickable-link");
+}
+//this function handles the replacement of innerHTML on the html page
+function htmlReplace(id, yourReplacement) {
+  let cityReplacement = document.querySelector(`#${id}`);
+  cityReplacement.innerHTML = `${yourReplacement}`;
+}
+//this function is in charge of changing the icon weather to the corresponding weather
+function weatherIcon(data) {
+  let weatherIcon = data.condition.icon_url;
+  let weatherIconChange = document.querySelector("#weather-icon");
+  weatherIconChange.src = `${weatherIcon}`;
+}
+// This function handles the daily forcast
 function weatherForcastSorting(response) {
   let dailyForcast = response.data.daily;
   let sentence = "";
@@ -172,30 +194,10 @@ function weatherForcastSorting(response) {
   let forcastSection = document.querySelector("#forcast-section");
   forcastSection.innerHTML = sentence;
 }
-function forecastApiCall(data) {
-  let query = data;
-  let key = "b7c86efaac7c13373o4d08b12f9t3f33";
-  let url = `https://api.shecodes.io/weather/v1/forecast?query=${query}&key=${key}&units=metric`;
-  //console.log(url);
-  axios.get(url).then(weatherForcastSorting);
-}
-function forcastDay(timestamp) {
-  let daysOfForcast = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  let date = new Date(timestamp * 1000);
-  let forcastDay = daysOfForcast[date.getDay()];
-  return forcastDay;
-}
-function getCoordApiData(response) {
-  //it gives the forcastapicall the name of the city searched by user
-  let data = response.data;
-  weatherIcon(data);
-  CityTemp(data);
-  CityName(data);
-  CityHumidity(data);
-  CityWind(data);
-  CityDescription(data);
-  getDate(data);
-}
+
+// For form submission
+let form = document.querySelector("form");
+form.addEventListener("submit", getFormInput);
 
 let currentLocationIcon = document.querySelector(".location-icon");
 currentLocationIcon.addEventListener("click", getUserGeoLocation);
@@ -205,5 +207,9 @@ farenheit.addEventListener("click", farenheitUnit);
 
 let celsius = document.querySelector("#celsius-unit");
 celsius.addEventListener("click", celsiusUnit);
+//Function to call for a default city.
+function defaultCity(defaultCity) {
+  apiCallForCitySearching(defaultCity);
+}
 
 defaultCity("paris");
