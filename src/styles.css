@@ -10,6 +10,12 @@
   border: 1px solid #d9dce0;
   border-radius: 7px;
 }
+.day-clicked {
+  border-radius: 4px;
+  border: 1px solid #d9dce0;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.5);
+}
 .containers h1 {
   color: azure;
   font-size: 22px;
