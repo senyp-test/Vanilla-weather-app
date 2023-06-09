@@ -35,6 +35,11 @@ function CityTemp(data) {
 function CityName(data) {
   let cityName = data.city;
   let country = data.country;
+  if (country === "United Kingdom of Great Britain and Northern Ireland") {
+    country = "UK";
+  } else {
+    country = country;
+  }
   htmlReplace("currentCity", `${cityName},${country}`);
 }
 
