@@ -11,7 +11,7 @@
   border-radius: 7px;
 }
 .containers h1 {
-  color: blueviolet;
+  color: azure;
   font-size: 22px;
 }
 
@@ -33,7 +33,16 @@ strong img {
 .day {
   line-height: 18px;
 }
-
+.day:hover {
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #d9dce0;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.5);
+}
+#day-and-time {
+  color: azure;
+}
 #temperature-value {
   font-size: 50px;
   font-weight: 500;
