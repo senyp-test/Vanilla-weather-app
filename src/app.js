@@ -184,7 +184,7 @@ function weatherForcastSorting(response) {
         descriptin: description,
       };
 
-      sentence += `<div class="shadow col-2 day day${index}">
+      sentence += `<div class="shadow col-2 day" id="day${index}">
             <h6>${day}</h6>
             <strong
               ><img
@@ -197,8 +197,44 @@ function weatherForcastSorting(response) {
   });
   let forcastSection = document.querySelector("#forcast-section");
   forcastSection.innerHTML = sentence;
+  handleDaysOfForcastClicking(forcastDetails);
 }
 
+function handleDaysOfForcastClicking(response) {
+  let day0 = document.querySelector("#day0");
+  day0.addEventListener("click", function () {
+    daysForcast(response[0]);
+  });
+  let day1 = document.querySelector("#day1");
+  day1.addEventListener("click", function () {
+    daysForcast(response[1]);
+  });
+  let day2 = document.querySelector("#day2");
+  day2.addEventListener("click", function () {
+    daysForcast(response[2]);
+  });
+  let day3 = document.querySelector("#day3");
+  day3.addEventListener("click", function () {
+    daysForcast(response[3]);
+  });
+  let day4 = document.querySelector("#day4");
+  day4.addEventListener("click", function () {
+    daysForcast(response[4]);
+  });
+  let day5 = document.querySelector("#day5");
+  day5.addEventListener("click", function () {
+    daysForcast(response[5]);
+  });
+}
+function daysForcast(forecast) {
+  let weatherIcon = forecast.icon;
+  let weatherIconChange = document.querySelector("#weather-icon");
+  weatherIconChange.src = `${weatherIcon}`;
+  htmlReplace("temperature-value", forecast.max);
+  htmlReplace("humidity-value", forecast.humi);
+  htmlReplace("wind-value", forecast.win);
+  htmlReplace("description", forecast.descriptin);
+}
 // For form submission
 let form = document.querySelector("form");
 form.addEventListener("submit", getFormInput);
